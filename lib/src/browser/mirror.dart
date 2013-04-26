@@ -4,14 +4,14 @@ part of mirror_v1_api_browser;
 /** API for interacting with Glass users via the timeline. */
 class Mirror extends BrowserClient {
 
-  ContactsResource _contacts;
-  ContactsResource get contacts => _contacts;
-  LocationsResource _locations;
-  LocationsResource get locations => _locations;
-  SubscriptionsResource _subscriptions;
-  SubscriptionsResource get subscriptions => _subscriptions;
-  TimelineResource _timeline;
-  TimelineResource get timeline => _timeline;
+  ContactsResource_ _contacts;
+  ContactsResource_ get contacts => _contacts;
+  LocationsResource_ _locations;
+  LocationsResource_ get locations => _locations;
+  SubscriptionsResource_ _subscriptions;
+  SubscriptionsResource_ get subscriptions => _subscriptions;
+  TimelineResource_ _timeline;
+  TimelineResource_ get timeline => _timeline;
 
   /**
    * Data format for the response.
@@ -65,9 +65,9 @@ class Mirror extends BrowserClient {
   Mirror([oauth.OAuth2 auth]) : super(auth) {
     basePath = "/mirror/v1/";
     rootUrl = "https://www.googleapis.com:443/";
-    _contacts = new ContactsResource(this);
-    _locations = new LocationsResource(this);
-    _subscriptions = new SubscriptionsResource(this);
-    _timeline = new TimelineResource(this);
+    _contacts = new ContactsResource_(this);
+    _locations = new LocationsResource_(this);
+    _subscriptions = new SubscriptionsResource_(this);
+    _timeline = new TimelineResource_(this);
   }
 }

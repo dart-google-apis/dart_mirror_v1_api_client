@@ -1,8 +1,8 @@
 part of mirror_v1_api_client;
 
-class ContactsResource extends Resource {
+class ContactsResource_ extends Resource {
 
-  ContactsResource(Client client) : super(client) {
+  ContactsResource_(Client client) : super(client) {
   }
 
   /**
@@ -30,7 +30,7 @@ class ContactsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -67,7 +67,7 @@ class ContactsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -102,7 +102,7 @@ class ContactsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -135,7 +135,7 @@ class ContactsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -174,7 +174,7 @@ class ContactsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -213,7 +213,7 @@ class ContactsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -226,9 +226,9 @@ class ContactsResource extends Resource {
   }
 }
 
-class LocationsResource extends Resource {
+class LocationsResource_ extends Resource {
 
-  LocationsResource(Client client) : super(client) {
+  LocationsResource_(Client client) : super(client) {
   }
 
   /**
@@ -256,7 +256,7 @@ class LocationsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -289,7 +289,7 @@ class LocationsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -302,9 +302,9 @@ class LocationsResource extends Resource {
   }
 }
 
-class SubscriptionsResource extends Resource {
+class SubscriptionsResource_ extends Resource {
 
-  SubscriptionsResource(Client client) : super(client) {
+  SubscriptionsResource_(Client client) : super(client) {
   }
 
   /**
@@ -332,7 +332,7 @@ class SubscriptionsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -367,7 +367,7 @@ class SubscriptionsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -400,7 +400,7 @@ class SubscriptionsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -439,7 +439,7 @@ class SubscriptionsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -452,13 +452,13 @@ class SubscriptionsResource extends Resource {
   }
 }
 
-class TimelineResource extends Resource {
+class TimelineResource_ extends Resource {
 
-  TimelineAttachmentsResource _attachments;
-  TimelineAttachmentsResource get attachments => _attachments;
+  TimelineAttachmentsResource_ _attachments;
+  TimelineAttachmentsResource_ get attachments => _attachments;
 
-  TimelineResource(Client client) : super(client) {
-  _attachments = new TimelineAttachmentsResource(client);
+  TimelineResource_(Client client) : super(client) {
+  _attachments = new TimelineAttachmentsResource_(client);
   }
 
   /**
@@ -486,7 +486,7 @@ class TimelineResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -523,7 +523,7 @@ class TimelineResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -563,7 +563,7 @@ class TimelineResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -627,7 +627,7 @@ class TimelineResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -666,7 +666,7 @@ class TimelineResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -710,7 +710,7 @@ class TimelineResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -727,9 +727,9 @@ class TimelineResource extends Resource {
   }
 }
 
-class TimelineAttachmentsResource extends Resource {
+class TimelineAttachmentsResource_ extends Resource {
 
-  TimelineAttachmentsResource(Client client) : super(client) {
+  TimelineAttachmentsResource_(Client client) : super(client) {
   }
 
   /**
@@ -761,7 +761,7 @@ class TimelineAttachmentsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -802,7 +802,7 @@ class TimelineAttachmentsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -844,7 +844,7 @@ class TimelineAttachmentsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 
@@ -885,7 +885,7 @@ class TimelineAttachmentsResource extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
       return completer.future;
     }
 

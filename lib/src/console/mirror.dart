@@ -64,7 +64,7 @@ class Mirror extends ConsoleClient {
 
   Mirror([oauth2.OAuth2Console auth]) : super(auth) {
     basePath = "/mirror/v1/";
-    rootUrl = "https://www.googleapis.com:443/";
+    rootUrl = "https://www.googleapis.com/";
     _contacts = new ContactsResource_(this);
     _locations = new LocationsResource_(this);
     _subscriptions = new SubscriptionsResource_(this);

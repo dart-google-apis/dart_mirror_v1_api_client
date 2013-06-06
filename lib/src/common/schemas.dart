@@ -817,7 +817,23 @@ class TimelineItem {
   /** ETag for this item. */
   core.String etag;
 
-  /** HTML content for this item. If both text and html are provided for an item, the html will be rendered in the timeline. */
+  /** HTML content for this item. If both text and html are provided for an item, the html will be rendered in the timeline.
+Allowed HTML elements - You can use these elements in your timeline cards.
+ 
+- Headers: h1, h2, h3, h4, h5, h6 
+- Images: img 
+- Lists: li, ol, ul 
+- HTML5 semantics: article, aside, details, figure, figcaption, footer, header, nav, section, summary, time 
+- Structural: blockquote, br, div, hr, p, span 
+- Style: b, big, center, em, i, u, s, small, strike, strong, style, sub, sup 
+- Tables: table, tbody, td, tfoot, th, thead, tr  
+Blocked HTML elements: These elements and their contents are removed from HTML payloads.
+ 
+- Document headers: head, title 
+- Embeds: audio, embed, object, source, video 
+- Frames: frame, frameset 
+- Scripting: applet, script  
+Other elements: Any elements that aren't listed are removed, but their contents are preserved. */
   core.String html;
 
   /** Additional pages of HTML content associated with this item. If this field is specified, the item will be displayed as a bundle, with the html field as the cover. It is an error to specify this field without specifying the html field. */
@@ -842,7 +858,7 @@ On the main timeline, items that are shown are:
   /** When true, indicates this item is deleted, and only the ID property is set. */
   core.bool isDeleted;
 
-  /** When true, indicates this item is pinned, which means it's grouped alongside "active" items like navigation and hangouts, on the opposite side of the home screen from historical (non-pinned) timeline items. */
+  /** When true, indicates this item is pinned, which means it's grouped alongside "active" items like navigation and hangouts, on the opposite side of the home screen from historical (non-pinned) timeline items. You can allow the user to toggle the value of this property with the TOGGLE_PINNED built-in menu item. */
   core.bool isPinned;
 
   /** The type of resource. This is always mirror#timelineItem. */
@@ -869,7 +885,7 @@ On the main timeline, items that are shown are:
   /** Opaque string you can use to map a timeline item to data in your own service. */
   core.String sourceItemId;
 
-  /** The speakable version of the content of this item. Along with the READ_ALOUD menu item, use this field to provide text that would be clearer when read aloud, or to provide extended information to what is displayed visually on Glass. */
+  /** The speakable version of the content of this item. Along with the READ_ALOUD menu item, use this field to provide text that would be clearer when read aloud, or to provide extended information to what is displayed visually on Glass. If you specified html content, use this property instead of text to specify the text to read aloud. */
   core.String speakableText;
 
   /** Text content of this item. */

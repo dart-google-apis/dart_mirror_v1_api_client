@@ -64,7 +64,7 @@ class Mirror extends BrowserClient {
 
   Mirror([oauth.OAuth2 auth]) : super(auth) {
     basePath = "/mirror/v1/";
-    rootUrl = "https://www.googleapis.com:443/";
+    rootUrl = "https://www.googleapis.com/";
     _contacts = new ContactsResource_(this);
     _locations = new LocationsResource_(this);
     _subscriptions = new SubscriptionsResource_(this);

@@ -796,7 +796,9 @@ class SubscriptionsListResponse {
 /** Each item in the user's timeline is represented as a TimelineItem JSON structure, described below. */
 class TimelineItem {
 
-  /** A list of media attachments associated with this item. */
+  /** A list of media attachments associated with this item. As a convenience, you can refer to attachments in your HTML payloads with the attachment or cid scheme. For example:  
+- attachment: <img src="attachment:attachment_index"> where attachment_index is the 0-based index of this array. 
+- cid: <img src="cid:attachment_id"> where attachment_id is the ID of the attachment. */
   core.List<Attachment> attachments;
 
   /** The bundle ID for this item. Services can specify a bundleId to group many items together. They appear under a single top-level item on the device. */

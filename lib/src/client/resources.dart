@@ -1,9 +1,11 @@
-part of mirror_v1_api_client;
+part of mirror_v1_api;
 
-class ContactsResource_ extends Resource {
+class ContactsResource_ {
 
-  ContactsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  ContactsResource_(Client client) :
+      _client = client;
 
   /**
    * Deletes a contact.
@@ -201,10 +203,12 @@ class ContactsResource_ extends Resource {
   }
 }
 
-class LocationsResource_ extends Resource {
+class LocationsResource_ {
 
-  LocationsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  LocationsResource_(Client client) :
+      _client = client;
 
   /**
    * Gets a single location by ID.
@@ -269,10 +273,12 @@ class LocationsResource_ extends Resource {
   }
 }
 
-class SubscriptionsResource_ extends Resource {
+class SubscriptionsResource_ {
 
-  SubscriptionsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  SubscriptionsResource_(Client client) :
+      _client = client;
 
   /**
    * Deletes a subscription.
@@ -402,14 +408,15 @@ class SubscriptionsResource_ extends Resource {
   }
 }
 
-class TimelineResource_ extends Resource {
+class TimelineResource_ {
 
-  TimelineAttachmentsResource_ _attachments;
-  TimelineAttachmentsResource_ get attachments => _attachments;
+  final Client _client;
 
-  TimelineResource_(Client client) : super(client) {
-  _attachments = new TimelineAttachmentsResource_(client);
-  }
+  final TimelineAttachmentsResource_ attachments;
+
+  TimelineResource_(Client client) :
+      _client = client,
+      attachments = new TimelineAttachmentsResource_(client);
 
   /**
    * Deletes a timeline item.
@@ -507,7 +514,7 @@ class TimelineResource_ extends Resource {
     }
 
     var response;
-    if (?content && content != null) {
+    if (content != null) {
       response = _client.upload(uploadUrl, "POST", request.toString(), content, contentType, urlParams: urlParams, queryParams: queryParams);
     } else {
       response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
@@ -642,7 +649,7 @@ class TimelineResource_ extends Resource {
     }
 
     var response;
-    if (?content && content != null) {
+    if (content != null) {
       response = _client.upload(uploadUrl, "PUT", request.toString(), content, contentType, urlParams: urlParams, queryParams: queryParams);
     } else {
       response = _client.request(url, "PUT", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
@@ -652,10 +659,12 @@ class TimelineResource_ extends Resource {
   }
 }
 
-class TimelineAttachmentsResource_ extends Resource {
+class TimelineAttachmentsResource_ {
 
-  TimelineAttachmentsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  TimelineAttachmentsResource_(Client client) :
+      _client = client;
 
   /**
    * Deletes an attachment from a timeline item.
@@ -763,7 +772,7 @@ class TimelineAttachmentsResource_ extends Resource {
     }
 
     var response;
-    if (?content && content != null) {
+    if (content != null) {
       response = _client.upload(uploadUrl, "POST", null, content, contentType, urlParams: urlParams, queryParams: queryParams);
     } else {
       response = _client.request(url, "POST", urlParams: urlParams, queryParams: queryParams);

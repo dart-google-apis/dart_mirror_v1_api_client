@@ -1,4 +1,4 @@
-part of mirror_v1_api_client;
+part of mirror_v1_api;
 
 /** Represents media content, such as a photo, that can be attached to a timeline item. */
 class Attachment {
@@ -68,10 +68,7 @@ class AttachmentsListResponse {
   /** Create new AttachmentsListResponse from JSON data */
   AttachmentsListResponse.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Attachment.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Attachment.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -83,10 +80,7 @@ class AttachmentsListResponse {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -135,10 +129,7 @@ class Contact {
   /** Create new Contact from JSON data */
   Contact.fromJson(core.Map json) {
     if (json.containsKey("acceptTypes")) {
-      acceptTypes = [];
-      json["acceptTypes"].forEach((item) {
-        acceptTypes.add(item);
-      });
+      acceptTypes = json["acceptTypes"].toList();
     }
     if (json.containsKey("displayName")) {
       displayName = json["displayName"];
@@ -147,10 +138,7 @@ class Contact {
       id = json["id"];
     }
     if (json.containsKey("imageUrls")) {
-      imageUrls = [];
-      json["imageUrls"].forEach((item) {
-        imageUrls.add(item);
-      });
+      imageUrls = json["imageUrls"].toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -174,10 +162,7 @@ class Contact {
     var output = new core.Map();
 
     if (acceptTypes != null) {
-      output["acceptTypes"] = new core.List();
-      acceptTypes.forEach((item) {
-        output["acceptTypes"].add(item);
-      });
+      output["acceptTypes"] = acceptTypes.toList();
     }
     if (displayName != null) {
       output["displayName"] = displayName;
@@ -186,10 +171,7 @@ class Contact {
       output["id"] = id;
     }
     if (imageUrls != null) {
-      output["imageUrls"] = new core.List();
-      imageUrls.forEach((item) {
-        output["imageUrls"].add(item);
-      });
+      output["imageUrls"] = imageUrls.toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -227,10 +209,7 @@ class ContactsListResponse {
   /** Create new ContactsListResponse from JSON data */
   ContactsListResponse.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Contact.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Contact.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -242,10 +221,7 @@ class ContactsListResponse {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -363,10 +339,7 @@ class LocationsListResponse {
   /** Create new LocationsListResponse from JSON data */
   LocationsListResponse.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Location.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Location.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -378,10 +351,7 @@ class LocationsListResponse {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -432,10 +402,7 @@ class MenuItem {
       removeWhenSelected = json["removeWhenSelected"];
     }
     if (json.containsKey("values")) {
-      values = [];
-      json["values"].forEach((item) {
-        values.add(new MenuValue.fromJson(item));
-      });
+      values = json["values"].map((valuesItem) => new MenuValue.fromJson(valuesItem)).toList();
     }
   }
 
@@ -453,10 +420,7 @@ class MenuItem {
       output["removeWhenSelected"] = removeWhenSelected;
     }
     if (values != null) {
-      output["values"] = new core.List();
-      values.forEach((item) {
-        output["values"].add(item.toJson());
-      });
+      output["values"] = values.map((valuesItem) => valuesItem.toJson()).toList();
     }
 
     return output;
@@ -550,10 +514,7 @@ class Notification {
       operation = json["operation"];
     }
     if (json.containsKey("userActions")) {
-      userActions = [];
-      json["userActions"].forEach((item) {
-        userActions.add(new UserAction.fromJson(item));
-      });
+      userActions = json["userActions"].map((userActionsItem) => new UserAction.fromJson(userActionsItem)).toList();
     }
     if (json.containsKey("userToken")) {
       userToken = json["userToken"];
@@ -577,10 +538,7 @@ class Notification {
       output["operation"] = operation;
     }
     if (userActions != null) {
-      output["userActions"] = new core.List();
-      userActions.forEach((item) {
-        output["userActions"].add(item.toJson());
-      });
+      output["userActions"] = userActions.map((userActionsItem) => userActionsItem.toJson()).toList();
     }
     if (userToken != null) {
       output["userToken"] = userToken;
@@ -690,10 +648,7 @@ class Subscription {
       notification = new Notification.fromJson(json["notification"]);
     }
     if (json.containsKey("operation")) {
-      operation = [];
-      json["operation"].forEach((item) {
-        operation.add(item);
-      });
+      operation = json["operation"].toList();
     }
     if (json.containsKey("updated")) {
       updated = json["updated"];
@@ -726,10 +681,7 @@ class Subscription {
       output["notification"] = notification.toJson();
     }
     if (operation != null) {
-      output["operation"] = new core.List();
-      operation.forEach((item) {
-        output["operation"].add(item);
-      });
+      output["operation"] = operation.toList();
     }
     if (updated != null) {
       output["updated"] = updated;
@@ -761,10 +713,7 @@ class SubscriptionsListResponse {
   /** Create new SubscriptionsListResponse from JSON data */
   SubscriptionsListResponse.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Subscription.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Subscription.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -776,10 +725,7 @@ class SubscriptionsListResponse {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -849,7 +795,7 @@ Other elements: Any elements that aren't listed are removed, but their contents 
 
   /** Whether this item is a bundle cover.
 
-If an item is marked as a bundle cover, it will be the entry point to the bundle of items that have the same bundleId as that item. It will be shown only on the main timeline â not within the opened bundle.
+If an item is marked as a bundle cover, it will be the entry point to the bundle of items that have the same bundleId as that item. It will be shown only on the main timeline — not within the opened bundle.
 
 On the main timeline, items that are shown are:  
 - Items that have isBundleCover set to true  
@@ -887,8 +833,17 @@ On the main timeline, items that are shown are:
   /** Opaque string you can use to map a timeline item to data in your own service. */
   core.String sourceItemId;
 
-  /** The speakable version of the content of this item. Along with the READ_ALOUD menu item, use this field to provide text that would be clearer when read aloud, or to provide extended information to what is displayed visually on Glass. If you specified html content, use this property instead of text to specify the text to read aloud. */
+  /** The speakable version of the content of this item. Along with the READ_ALOUD menu item, use this field to provide text that would be clearer when read aloud, or to provide extended information to what is displayed visually on Glass.
+
+Glassware should also specify the speakableType field, which will be spoken before this text in cases where the additional context is useful, for example when the user requests that the item be read aloud following a notification. */
   core.String speakableText;
+
+  /** A speakable description of the type of this item. This will be announced to the user prior to reading the content of the item in cases where the additional context is useful, for example when the user requests that the item be read aloud following a notification.
+
+This should be a short, simple noun phrase such as "Email", "Text message", or "Daily Planet News Update".
+
+Glassware are encouraged to populate this field for every timeline item, even if the item does not contain speakableText or text so that the user can learn the type of the item without looking at the screen. */
+  core.String speakableType;
 
   /** Text content of this item. */
   core.String text;
@@ -902,10 +857,7 @@ On the main timeline, items that are shown are:
   /** Create new TimelineItem from JSON data */
   TimelineItem.fromJson(core.Map json) {
     if (json.containsKey("attachments")) {
-      attachments = [];
-      json["attachments"].forEach((item) {
-        attachments.add(new Attachment.fromJson(item));
-      });
+      attachments = json["attachments"].map((attachmentsItem) => new Attachment.fromJson(attachmentsItem)).toList();
     }
     if (json.containsKey("bundleId")) {
       bundleId = json["bundleId"];
@@ -929,10 +881,7 @@ On the main timeline, items that are shown are:
       html = json["html"];
     }
     if (json.containsKey("htmlPages")) {
-      htmlPages = [];
-      json["htmlPages"].forEach((item) {
-        htmlPages.add(item);
-      });
+      htmlPages = json["htmlPages"].toList();
     }
     if (json.containsKey("id")) {
       id = json["id"];
@@ -956,10 +905,7 @@ On the main timeline, items that are shown are:
       location = new Location.fromJson(json["location"]);
     }
     if (json.containsKey("menuItems")) {
-      menuItems = [];
-      json["menuItems"].forEach((item) {
-        menuItems.add(new MenuItem.fromJson(item));
-      });
+      menuItems = json["menuItems"].map((menuItemsItem) => new MenuItem.fromJson(menuItemsItem)).toList();
     }
     if (json.containsKey("notification")) {
       notification = new NotificationConfig.fromJson(json["notification"]);
@@ -968,10 +914,7 @@ On the main timeline, items that are shown are:
       pinScore = json["pinScore"];
     }
     if (json.containsKey("recipients")) {
-      recipients = [];
-      json["recipients"].forEach((item) {
-        recipients.add(new Contact.fromJson(item));
-      });
+      recipients = json["recipients"].map((recipientsItem) => new Contact.fromJson(recipientsItem)).toList();
     }
     if (json.containsKey("selfLink")) {
       selfLink = json["selfLink"];
@@ -981,6 +924,9 @@ On the main timeline, items that are shown are:
     }
     if (json.containsKey("speakableText")) {
       speakableText = json["speakableText"];
+    }
+    if (json.containsKey("speakableType")) {
+      speakableType = json["speakableType"];
     }
     if (json.containsKey("text")) {
       text = json["text"];
@@ -998,10 +944,7 @@ On the main timeline, items that are shown are:
     var output = new core.Map();
 
     if (attachments != null) {
-      output["attachments"] = new core.List();
-      attachments.forEach((item) {
-        output["attachments"].add(item.toJson());
-      });
+      output["attachments"] = attachments.map((attachmentsItem) => attachmentsItem.toJson()).toList();
     }
     if (bundleId != null) {
       output["bundleId"] = bundleId;
@@ -1025,10 +968,7 @@ On the main timeline, items that are shown are:
       output["html"] = html;
     }
     if (htmlPages != null) {
-      output["htmlPages"] = new core.List();
-      htmlPages.forEach((item) {
-        output["htmlPages"].add(item);
-      });
+      output["htmlPages"] = htmlPages.toList();
     }
     if (id != null) {
       output["id"] = id;
@@ -1052,10 +992,7 @@ On the main timeline, items that are shown are:
       output["location"] = location.toJson();
     }
     if (menuItems != null) {
-      output["menuItems"] = new core.List();
-      menuItems.forEach((item) {
-        output["menuItems"].add(item.toJson());
-      });
+      output["menuItems"] = menuItems.map((menuItemsItem) => menuItemsItem.toJson()).toList();
     }
     if (notification != null) {
       output["notification"] = notification.toJson();
@@ -1064,10 +1001,7 @@ On the main timeline, items that are shown are:
       output["pinScore"] = pinScore;
     }
     if (recipients != null) {
-      output["recipients"] = new core.List();
-      recipients.forEach((item) {
-        output["recipients"].add(item.toJson());
-      });
+      output["recipients"] = recipients.map((recipientsItem) => recipientsItem.toJson()).toList();
     }
     if (selfLink != null) {
       output["selfLink"] = selfLink;
@@ -1077,6 +1011,9 @@ On the main timeline, items that are shown are:
     }
     if (speakableText != null) {
       output["speakableText"] = speakableText;
+    }
+    if (speakableType != null) {
+      output["speakableType"] = speakableType;
     }
     if (text != null) {
       output["text"] = text;
@@ -1111,10 +1048,7 @@ class TimelineListResponse {
   /** Create new TimelineListResponse from JSON data */
   TimelineListResponse.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new TimelineItem.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new TimelineItem.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -1129,10 +1063,7 @@ class TimelineListResponse {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -1196,3 +1127,16 @@ For actions of type CUSTOM, this is the ID of the custom menu item that was sele
 
 }
 
+core.Map _mapMap(core.Map source, [core.Object convert(core.Object source) = null]) {
+  assert(source != null);
+  var result = new dart_collection.LinkedHashMap();
+  source.forEach((core.String key, value) {
+    assert(key != null);
+    if(convert == null) {
+      result[key] = value;
+    } else {
+      result[key] = convert(value);
+    }
+  });
+  return result;
+}

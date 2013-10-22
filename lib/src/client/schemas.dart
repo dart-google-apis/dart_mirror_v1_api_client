@@ -52,7 +52,7 @@ class Attachment {
   }
 
   /** Return String representation of Attachment */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -90,12 +90,46 @@ class AttachmentsListResponse {
   }
 
   /** Return String representation of AttachmentsListResponse */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** A single menu command that is part of a Contact. */
+class Command {
+
+  /** The type of operation this command corresponds to. Allowed values are:  
+- TAKE_A_NOTE - Shares a timeline item with the transcription of user speech from the "Take a note" voice menu command.  
+- POST_AN_UPDATE - Shares a timeline item with the transcription of user speech from the "Post an update" voice menu command. */
+  core.String type;
+
+  /** Create new Command from JSON data */
+  Command.fromJson(core.Map json) {
+    if (json.containsKey("type")) {
+      type = json["type"];
+    }
+  }
+
+  /** Create JSON Object for Command */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (type != null) {
+      output["type"] = type;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of Command */
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
 /** A person or group that can be used as a creator or a contact. */
 class Contact {
+
+  /** A list of voice menu commands that a contact can handle. Glass shows up to three contacts for each voice menu command. If there are more than that, the three contacts with the highest priority are shown for that particular command. */
+  core.List<Command> acceptCommands;
 
   /** A list of MIME types that a contact supports. The contact will be shown to the user if any of its acceptTypes matches any of the types of the attachments on the item. If no acceptTypes are given, the contact will be shown for all items. */
   core.List<core.String> acceptTypes;
@@ -118,8 +152,15 @@ class Contact {
   /** Priority for the contact to determine ordering in a list of contacts. Contacts with higher priorities will be shown before ones with lower priorities. */
   core.int priority;
 
+  /** A list of sharing features that a contact can handle. Allowed values are:  
+- ADD_CAPTION */
+  core.List<core.String> sharingFeatures;
+
   /** The ID of the application that created this contact. This is populated by the API */
   core.String source;
+
+  /** Name of this contact as it should be pronounced. If this contact's name must be spoken as part of a voice disambiguation menu, this name is used as the expected pronunciation. This is useful for contact names with unpronounceable characters or whose display spelling is otherwise not phonetic. */
+  core.String speakableName;
 
   /** The type for this contact. This is used for sorting in UIs. Allowed values are:  
 - INDIVIDUAL - Represents a single person. This is the default. 
@@ -128,6 +169,9 @@ class Contact {
 
   /** Create new Contact from JSON data */
   Contact.fromJson(core.Map json) {
+    if (json.containsKey("acceptCommands")) {
+      acceptCommands = json["acceptCommands"].map((acceptCommandsItem) => new Command.fromJson(acceptCommandsItem)).toList();
+    }
     if (json.containsKey("acceptTypes")) {
       acceptTypes = json["acceptTypes"].toList();
     }
@@ -149,8 +193,14 @@ class Contact {
     if (json.containsKey("priority")) {
       priority = json["priority"];
     }
+    if (json.containsKey("sharingFeatures")) {
+      sharingFeatures = json["sharingFeatures"].toList();
+    }
     if (json.containsKey("source")) {
       source = json["source"];
+    }
+    if (json.containsKey("speakableName")) {
+      speakableName = json["speakableName"];
     }
     if (json.containsKey("type")) {
       type = json["type"];
@@ -161,6 +211,9 @@ class Contact {
   core.Map toJson() {
     var output = new core.Map();
 
+    if (acceptCommands != null) {
+      output["acceptCommands"] = acceptCommands.map((acceptCommandsItem) => acceptCommandsItem.toJson()).toList();
+    }
     if (acceptTypes != null) {
       output["acceptTypes"] = acceptTypes.toList();
     }
@@ -182,8 +235,14 @@ class Contact {
     if (priority != null) {
       output["priority"] = priority;
     }
+    if (sharingFeatures != null) {
+      output["sharingFeatures"] = sharingFeatures.toList();
+    }
     if (source != null) {
       output["source"] = source;
+    }
+    if (speakableName != null) {
+      output["speakableName"] = speakableName;
     }
     if (type != null) {
       output["type"] = type;
@@ -193,7 +252,7 @@ class Contact {
   }
 
   /** Return String representation of Contact */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -231,7 +290,7 @@ class ContactsListResponse {
   }
 
   /** Return String representation of ContactsListResponse */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -323,7 +382,7 @@ class Location {
   }
 
   /** Return String representation of Location */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -361,7 +420,7 @@ class LocationsListResponse {
   }
 
   /** Return String representation of LocationsListResponse */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -378,11 +437,18 @@ class MenuItem {
 - READ_ALOUD - Read the timeline item's speakableText aloud; if this field is not set, read the text field; if none of those fields are set, this menu item is ignored.  
 - VOICE_CALL - Initiate a phone call using the timeline item's creator.phone_number attribute as recipient. 
 - NAVIGATE - Navigate to the timeline item's location. 
-- TOGGLE_PINNED - Toggle the isPinned state of the timeline item. */
+- TOGGLE_PINNED - Toggle the isPinned state of the timeline item. 
+- OPEN_URI - Open the payload of the menu item in the browser. 
+- PLAY_VIDEO - Open the payload of the menu item in the Glass video player. */
   core.String action;
 
   /** The ID for this menu item. This is generated by the application and is treated as an opaque token. */
   core.String id;
+
+  /** A generic payload whose meaning changes depending on this MenuItem's action.  
+- When the action is OPEN_URI, the payload is the URL of the website to view. 
+- When the action is PLAY_VIDEO, the payload is the streaming URL of the video */
+  core.String payload;
 
   /** If set to true on a CUSTOM menu item, that item will be removed from the menu after it is selected. */
   core.bool removeWhenSelected;
@@ -397,6 +463,9 @@ class MenuItem {
     }
     if (json.containsKey("id")) {
       id = json["id"];
+    }
+    if (json.containsKey("payload")) {
+      payload = json["payload"];
     }
     if (json.containsKey("removeWhenSelected")) {
       removeWhenSelected = json["removeWhenSelected"];
@@ -416,6 +485,9 @@ class MenuItem {
     if (id != null) {
       output["id"] = id;
     }
+    if (payload != null) {
+      output["payload"] = payload;
+    }
     if (removeWhenSelected != null) {
       output["removeWhenSelected"] = removeWhenSelected;
     }
@@ -427,14 +499,14 @@ class MenuItem {
   }
 
   /** Return String representation of MenuItem */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
 /** A single value that is part of a MenuItem. */
 class MenuValue {
 
-  /** The name to display for the menu item. */
+  /** The name to display for the menu item. If you specify this property for a built-in menu item, the default contextual voice command for that menu item is not shown. */
   core.String displayName;
 
   /** URL of an icon to display with the menu item. */
@@ -477,7 +549,7 @@ class MenuValue {
   }
 
   /** Return String representation of MenuValue */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -551,7 +623,7 @@ class Notification {
   }
 
   /** Return String representation of Notification */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -590,7 +662,7 @@ class NotificationConfig {
   }
 
   /** Return String representation of NotificationConfig */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -697,7 +769,7 @@ class Subscription {
   }
 
   /** Return String representation of Subscription */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -735,7 +807,7 @@ class SubscriptionsListResponse {
   }
 
   /** Return String representation of SubscriptionsListResponse */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -783,9 +855,6 @@ Blocked HTML elements: These elements and their contents are removed from HTML p
 - Scripting: applet, script  
 Other elements: Any elements that aren't listed are removed, but their contents are preserved. */
   core.String html;
-
-  /** Additional pages of HTML content associated with this item. If this field is specified, the item will be displayed as a bundle, with the html field as the cover. It is an error to specify this field without specifying the html field. */
-  core.List<core.String> htmlPages;
 
   /** The ID of the timeline item. This is unique within a user's timeline. */
   core.String id;
@@ -880,9 +949,6 @@ Glassware are encouraged to populate this field for every timeline item, even if
     if (json.containsKey("html")) {
       html = json["html"];
     }
-    if (json.containsKey("htmlPages")) {
-      htmlPages = json["htmlPages"].toList();
-    }
     if (json.containsKey("id")) {
       id = json["id"];
     }
@@ -967,9 +1033,6 @@ Glassware are encouraged to populate this field for every timeline item, even if
     if (html != null) {
       output["html"] = html;
     }
-    if (htmlPages != null) {
-      output["htmlPages"] = htmlPages.toList();
-    }
     if (id != null) {
       output["id"] = id;
     }
@@ -1029,7 +1092,7 @@ Glassware are encouraged to populate this field for every timeline item, even if
   }
 
   /** Return String representation of TimelineItem */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1076,7 +1139,7 @@ class TimelineListResponse {
   }
 
   /** Return String representation of TimelineListResponse */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1095,7 +1158,8 @@ For actions of type CUSTOM, this is the ID of the custom menu item that was sele
 - CUSTOM - the user selected a custom menu item on the timeline item. 
 - DELETE - the user deleted the item. 
 - PIN - the user pinned the item. 
-- UNPIN - the user unpinned the item.  In the future, additional types may be added. UserActions with unrecognized types should be ignored. */
+- UNPIN - the user unpinned the item. 
+- LAUNCH - the user initiated a voice command.  In the future, additional types may be added. UserActions with unrecognized types should be ignored. */
   core.String type;
 
   /** Create new UserAction from JSON data */
@@ -1123,7 +1187,7 @@ For actions of type CUSTOM, this is the ID of the custom menu item that was sele
   }
 
   /** Return String representation of UserAction */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 

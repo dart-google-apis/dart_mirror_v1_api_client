@@ -14,7 +14,7 @@ Adding dependency to pubspec.yaml
 
 ```
   dependencies:
-    google_mirror_v1_api: '>=0.3.5'
+    google_mirror_v1_api: '>=0.4.6'
 ```
 
 For web applications:

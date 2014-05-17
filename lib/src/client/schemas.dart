@@ -1,5 +1,57 @@
 part of mirror_v1_api;
 
+/** Represents an account passed into the Account Manager on Glass. */
+class Account {
+
+  core.List<AuthToken> authTokens;
+
+  core.List<core.String> features;
+
+  core.String password;
+
+  core.List<UserData> userData;
+
+  /** Create new Account from JSON data */
+  Account.fromJson(core.Map json) {
+    if (json.containsKey("authTokens")) {
+      authTokens = json["authTokens"].map((authTokensItem) => new AuthToken.fromJson(authTokensItem)).toList();
+    }
+    if (json.containsKey("features")) {
+      features = json["features"].toList();
+    }
+    if (json.containsKey("password")) {
+      password = json["password"];
+    }
+    if (json.containsKey("userData")) {
+      userData = json["userData"].map((userDataItem) => new UserData.fromJson(userDataItem)).toList();
+    }
+  }
+
+  /** Create JSON Object for Account */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (authTokens != null) {
+      output["authTokens"] = authTokens.map((authTokensItem) => authTokensItem.toJson()).toList();
+    }
+    if (features != null) {
+      output["features"] = features.toList();
+    }
+    if (password != null) {
+      output["password"] = password;
+    }
+    if (userData != null) {
+      output["userData"] = userData.map((userDataItem) => userDataItem.toJson()).toList();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of Account */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
 /** Represents media content, such as a photo, that can be attached to a timeline item. */
 class Attachment {
 
@@ -90,6 +142,41 @@ class AttachmentsListResponse {
   }
 
   /** Return String representation of AttachmentsListResponse */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+class AuthToken {
+
+  core.String authToken;
+
+  core.String type;
+
+  /** Create new AuthToken from JSON data */
+  AuthToken.fromJson(core.Map json) {
+    if (json.containsKey("authToken")) {
+      authToken = json["authToken"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
+    }
+  }
+
+  /** Create JSON Object for AuthToken */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (authToken != null) {
+      output["authToken"] = authToken;
+    }
+    if (type != null) {
+      output["type"] = type;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of AuthToken */
   core.String toString() => JSON.encode(this.toJson());
 
 }
@@ -434,7 +521,8 @@ class MenuItem {
 - REPLY_ALL - Same behavior as REPLY. The original timeline item's recipients will be added to the reply item. 
 - DELETE - Delete the timeline item. 
 - SHARE - Share the timeline item with the available contacts. 
-- READ_ALOUD - Read the timeline item's speakableText aloud; if this field is not set, read the text field; if none of those fields are set, this menu item is ignored.  
+- READ_ALOUD - Read the timeline item's speakableText aloud; if this field is not set, read the text field; if none of those fields are set, this menu item is ignored. 
+- GET_MEDIA_INPUT - Allow users to provide media payloads to Glassware from a menu item (currently, only transcribed text from voice input is supported). Subscribe to notifications when users invoke this menu item to receive the timeline item ID. Retrieve the media from the timeline item in the payload property. 
 - VOICE_CALL - Initiate a phone call using the timeline item's creator.phoneNumber attribute as recipient. 
 - NAVIGATE - Navigate to the timeline item's location. 
 - TOGGLE_PINNED - Toggle the isPinned state of the timeline item. 
@@ -450,7 +538,8 @@ class MenuItem {
 
   /** A generic payload whose meaning changes depending on this MenuItem's action.  
 - When the action is OPEN_URI, the payload is the URL of the website to view. 
-- When the action is PLAY_VIDEO, the payload is the streaming URL of the video */
+- When the action is PLAY_VIDEO, the payload is the streaming URL of the video 
+- When the action is GET_MEDIA_INPUT, the payload is the text transcription of a user's speech input */
   core.String payload;
 
   /** If set to true on a CUSTOM menu item, that item will be removed from the menu after it is selected. */
@@ -665,6 +754,53 @@ class NotificationConfig {
   }
 
   /** Return String representation of NotificationConfig */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** A setting for Glass. */
+class Setting {
+
+  /** The setting's ID. */
+  core.String id;
+
+  /** The type of resource. This is always mirror#setting. */
+  core.String kind;
+
+  /** The setting value, as a string. */
+  core.String value;
+
+  /** Create new Setting from JSON data */
+  Setting.fromJson(core.Map json) {
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("value")) {
+      value = json["value"];
+    }
+  }
+
+  /** Create JSON Object for Setting */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (value != null) {
+      output["value"] = value;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of Setting */
   core.String toString() => JSON.encode(this.toJson());
 
 }
@@ -1190,6 +1326,41 @@ For actions of type CUSTOM, this is the ID of the custom menu item that was sele
   }
 
   /** Return String representation of UserAction */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+class UserData {
+
+  core.String key;
+
+  core.String value;
+
+  /** Create new UserData from JSON data */
+  UserData.fromJson(core.Map json) {
+    if (json.containsKey("key")) {
+      key = json["key"];
+    }
+    if (json.containsKey("value")) {
+      value = json["value"];
+    }
+  }
+
+  /** Create JSON Object for UserData */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (key != null) {
+      output["key"] = key;
+    }
+    if (value != null) {
+      output["value"] = value;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of UserData */
   core.String toString() => JSON.encode(this.toJson());
 
 }

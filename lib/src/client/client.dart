@@ -8,8 +8,10 @@ abstract class Client extends ClientBase {
   // Resources
   //
 
+  AccountsResource_ get accounts => new AccountsResource_(this);
   ContactsResource_ get contacts => new ContactsResource_(this);
   LocationsResource_ get locations => new LocationsResource_(this);
+  SettingsResource_ get settings => new SettingsResource_(this);
   SubscriptionsResource_ get subscriptions => new SubscriptionsResource_(this);
   TimelineResource_ get timeline => new TimelineResource_(this);
 

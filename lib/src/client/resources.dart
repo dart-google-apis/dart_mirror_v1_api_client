@@ -1,5 +1,56 @@
 part of mirror_v1_api;
 
+class AccountsResource_ {
+
+  final Client _client;
+
+  AccountsResource_(Client client) :
+      _client = client;
+
+  /**
+   * Inserts a new account for a user
+   *
+   * [request] - Account to send in this request
+   *
+   * [userToken] - The ID for the user.
+   *
+   * [accountType] - Account type to be passed to Android Account Manager.
+   *
+   * [accountName] - The name of the account to be passed to the Android Account Manager.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Account> insert(Account request, core.String userToken, core.String accountType, core.String accountName, {core.Map optParams}) {
+    var url = "accounts/{userToken}/{accountType}/{accountName}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountName == null) paramErrors.add("accountName is required");
+    if (accountName != null) urlParams["accountName"] = accountName;
+    if (accountType == null) paramErrors.add("accountType is required");
+    if (accountType != null) urlParams["accountType"] = accountType;
+    if (userToken == null) paramErrors.add("userToken is required");
+    if (userToken != null) urlParams["userToken"] = userToken;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new Account.fromJson(data));
+  }
+}
+
 class ContactsResource_ {
 
   final Client _client;
@@ -270,6 +321,47 @@ class LocationsResource_ {
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
     return response
       .then((data) => new LocationsListResponse.fromJson(data));
+  }
+}
+
+class SettingsResource_ {
+
+  final Client _client;
+
+  SettingsResource_(Client client) :
+      _client = client;
+
+  /**
+   * Gets a single setting by ID.
+   *
+   * [id] - The ID of the setting.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Setting> get(core.String id, {core.Map optParams}) {
+    var url = "settings/{id}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (id == null) paramErrors.add("id is required");
+    if (id != null) urlParams["id"] = id;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new Setting.fromJson(data));
   }
 }
 

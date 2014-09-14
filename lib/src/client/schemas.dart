@@ -761,7 +761,9 @@ class NotificationConfig {
 /** A setting for Glass. */
 class Setting {
 
-  /** The setting's ID. */
+  /** The setting's ID. The following IDs are valid:  
+- locale - The key to the user’s language/locale (BCP 47 identifier) that Glassware should use to render localized content.  
+- timezone - The key to the user’s current time zone region as defined in the tz database. Example: America/Los_Angeles. */
   core.String id;
 
   /** The type of resource. This is always mirror#setting. */
@@ -813,7 +815,8 @@ class Subscription {
 
   /** The collection to subscribe to. Allowed values are:  
 - timeline - Changes in the timeline including insertion, deletion, and updates. 
-- locations - Location updates. */
+- locations - Location updates. 
+- settings - Settings updates. */
   core.String collection;
 
   /** The ID of the subscription. */

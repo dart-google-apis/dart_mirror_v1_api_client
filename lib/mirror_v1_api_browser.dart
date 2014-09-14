@@ -6,6 +6,7 @@ import 'package:google_mirror_v1_api/src/browser_client.dart';
 import "package:google_mirror_v1_api/mirror_v1_api_client.dart";
 
 /** API for interacting with Glass users via the timeline. */
+@deprecated
 class Mirror extends Client with BrowserClient {
 
   /** OAuth Scope2: View your location */
